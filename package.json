@@ -13,7 +13,9 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
     "open:ios": "xed example/ios",
-    "open:android": "open -a \"Android Studio\" example/android"
+    "open:android": "open -a \"Android Studio\" example/android",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "keywords": [
     "react-native",
@@ -28,7 +30,11 @@
   "author": "Matheus Souza <souzasmatheus.dev@gmail.com> (https://github.com/souzasmatheus)",
   "license": "MIT",
   "homepage": "https://github.com/souzasmatheus/speech-recognition#readme",
-  "dependencies": {},
+  "dependencies": {
+    "expo": "~52.0.46",
+    "react": "18.3.1",
+    "react-native": "0.76.9"
+  },
   "devDependencies": {
     "@types/react": "~18.3.12",
     "expo-module-scripts": "^4.0.4",

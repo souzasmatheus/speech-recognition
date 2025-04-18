@@ -1,17 +1,6 @@
 {
-  "platforms": [
-    "apple",
-    "android",
-    "web"
-  ],
+  "platforms": ["apple"],
   "apple": {
-    "modules": [
-      "SpeechRecognitionModule"
-    ]
-  },
-  "android": {
-    "modules": [
-      "com.souzasmatheus.speechrecognition.SpeechRecognitionModule"
-    ]
+    "modules": ["SpeechRecognitionModule"]
   }
 }
