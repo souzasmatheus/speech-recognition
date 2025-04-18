@@ -1,39 +1,29 @@
-import { useEvent } from 'expo';
-import SpeechRecognition, { SpeechRecognitionView } from 'speech-recognition';
-import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
+import { useEvent } from "expo";
+import { Button, SafeAreaView, Text, View } from "react-native";
+import SpeechRecognition, {
+  startSpeechRecognition,
+  stopSpeechRecognition,
+} from "speech-recognition";
 
 export default function App() {
-  const onChangePayload = useEvent(SpeechRecognition, 'onChange');
+  const onChangePayload = useEvent(SpeechRecognition, "onResult");
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{SpeechRecognition.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{SpeechRecognition.hello()}</Text>
-        </Group>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await SpeechRecognition.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <SpeechRecognitionView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
-        </Group>
-      </ScrollView>
+      <Text style={styles.header}>Speech Recognition</Text>
+      <Group name="Start/Stop">
+        <Button
+          title="Start Speech Recognition"
+          onPress={startSpeechRecognition}
+        />
+        <Button
+          title="Stop Speech Recognition"
+          onPress={stopSpeechRecognition}
+        />
+      </Group>
+      <Group name="Result">
+        <Text>{onChangePayload?.result}</Text>
+      </Group>
     </SafeAreaView>
   );
 }
@@ -58,16 +48,12 @@ const styles = {
   },
   group: {
     margin: 20,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     borderRadius: 10,
     padding: 20,
   },
   container: {
     flex: 1,
-    backgroundColor: '#eee',
-  },
-  view: {
-    flex: 1,
-    height: 200,
+    backgroundColor: "#eee",
   },
 };
