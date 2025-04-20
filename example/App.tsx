@@ -1,8 +1,9 @@
 import { useEvent } from "expo";
-import { Button, SafeAreaView, Text, View } from "react-native";
+import { Button, SafeAreaView, ScrollView, Text, View } from "react-native";
 import SpeechRecognition, {
   startSpeechRecognition,
   stopSpeechRecognition,
+  setLanguage,
 } from "speech-recognition";
 
 export default function App() {
@@ -10,20 +11,28 @@ export default function App() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <Text style={styles.header}>Speech Recognition</Text>
-      <Group name="Start/Stop">
-        <Button
-          title="Start Speech Recognition"
-          onPress={startSpeechRecognition}
-        />
-        <Button
-          title="Stop Speech Recognition"
-          onPress={stopSpeechRecognition}
-        />
-      </Group>
-      <Group name="Result">
-        <Text>{onChangePayload?.result}</Text>
-      </Group>
+      <ScrollView style={styles.container}>
+        <Text style={styles.header}>Speech Recognition</Text>
+        <Group name="Options">
+          <Button title="🇧🇷" onPress={() => setLanguage("pt-BR")} />
+          <Button title="🇺🇸" onPress={() => setLanguage("en-US")} />
+          <Button title="🇫🇷" onPress={() => setLanguage("fr-FR")} />
+          <Button title="🇮🇹" onPress={() => setLanguage("it-IT")} />
+        </Group>
+        <Group name="Start/Stop">
+          <Button
+            title="Start Speech Recognition"
+            onPress={startSpeechRecognition}
+          />
+          <Button
+            title="Stop Speech Recognition"
+            onPress={stopSpeechRecognition}
+          />
+        </Group>
+        <Group name="Result">
+          <Text>{onChangePayload?.result}</Text>
+        </Group>
+      </ScrollView>
     </SafeAreaView>
   );
 }
