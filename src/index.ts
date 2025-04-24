@@ -1,15 +1,26 @@
+import { useEvent } from "expo";
 import SpeechRecognitionModule from "./SpeechRecognitionModule";
 export * from "./SpeechRecognition.types";
 export { default } from "./SpeechRecognitionModule";
 
-export function startSpeechRecognition() {
-  return SpeechRecognitionModule.start();
-}
+export function useSpeechRecognition(language?: string) {
+  if (language) {
+    SpeechRecognitionModule.setLanguage(language);
+  }
 
-export function stopSpeechRecognition() {
-  return SpeechRecognitionModule.stop();
-}
+  const value = useEvent(SpeechRecognitionModule, "onResult");
 
-export function setLanguage(language: string) {
-  return SpeechRecognitionModule.setLanguage(language);
+  function startSpeechRecognition() {
+    SpeechRecognitionModule.start();
+  }
+
+  function stopSpeechRecognition() {
+    SpeechRecognitionModule.stop();
+  }
+
+  return {
+    startSpeechRecognition,
+    stopSpeechRecognition,
+    result: value?.result,
+  };
 }
