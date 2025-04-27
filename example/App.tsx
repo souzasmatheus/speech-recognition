@@ -1,13 +1,11 @@
-import { useEvent } from "expo";
+import { useState } from "react";
 import { Button, SafeAreaView, ScrollView, Text, View } from "react-native";
-import SpeechRecognition, {
-  startSpeechRecognition,
-  stopSpeechRecognition,
-  setLanguage,
-} from "speech-recognition";
+import { useSpeechRecognition } from "speech-recognition";
 
 export default function App() {
-  const onChangePayload = useEvent(SpeechRecognition, "onResult");
+  const [language, setLanguage] = useState("en-US");
+  const { startSpeechRecognition, stopSpeechRecognition, result } =
+    useSpeechRecognition(language);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,7 +28,7 @@ export default function App() {
           />
         </Group>
         <Group name="Result">
-          <Text>{onChangePayload?.result}</Text>
+          <Text>{result}</Text>
         </Group>
       </ScrollView>
     </SafeAreaView>
